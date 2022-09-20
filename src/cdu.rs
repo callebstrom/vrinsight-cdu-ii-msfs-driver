@@ -1,6 +1,4 @@
-use serialport::{
-    self, DataBits, FlowControl, Parity, SerialPortInfo, SerialPortSettings, StopBits,
-};
+use serialport::{self, DataBits, FlowControl, Parity, SerialPortSettings, StopBits};
 use std::time::Duration;
 
 const RESET_COMMAND: &[u8] = &[0x43, 0x4d, 0x44, 0x52, 0x53, 0x54, 0x00, 0x00]; // CMDRST..
@@ -85,6 +83,7 @@ impl CDU {
         return self
             .port
             .read_exact(buf.as_mut())
-            .map(|()| String::from_utf8(buf).expect("Could read parse CDU data"));
+            .map(|()| String::from_utf8(buf).expect("Could read parse CDU data"))
+            .map(|key| key.split("\0").next().expect("").to_string());
     }
 }

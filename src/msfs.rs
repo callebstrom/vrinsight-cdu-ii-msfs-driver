@@ -12,17 +12,17 @@ impl MSFS<'_> {
         return MSFS { app_name };
     }
 
-    fn send_event(&self) {
+    pub fn send_event(&self, event: &String) {
         let event_id = 0;
         let group_id = 1;
-        let event_name = "MobiFlight.CJ4_FMC_1_BTN_0";
+        let event_name = format!("MobiFlight.{event}");
 
         let mut conn = simconnect::SimConnector::new();
-        if !conn.connect("Hej") {
+
+        if !conn.connect(self.app_name) {
             panic!("Could not connect via SimConnect. Is simulator running?");
         }
-        // EVENT_SET_HVAR
-        if !conn.map_client_event_to_sim_event(event_id, event_name) {
+        if !conn.map_client_event_to_sim_event(event_id, event_name.as_str()) {
             panic!("Could not register event");
         }
 
