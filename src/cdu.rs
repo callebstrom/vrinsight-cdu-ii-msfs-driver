@@ -39,7 +39,7 @@ impl CDU {
         )
         .expect("Could not connect to serial port");
 
-        println!("Connected");
+        log::info!("Connected to serial device on COM7");
         return port;
     }
 
@@ -51,7 +51,7 @@ impl CDU {
     }
 
     fn configure(port: &mut dyn serialport::SerialPort) -> () {
-        println!("Configuring");
+        log::trace!("Configuring CDU II");
 
         port.write(RESET_COMMAND).expect("Could not reset device");
         std::thread::sleep(Duration::from_secs(5));
@@ -62,15 +62,15 @@ impl CDU {
 
         Self::get_command_response(port).expect("Could not reset device");
 
-        println!("Reset device");
+        log::info!("Successfully reset CDU II");
 
         port.write(GET_FUNCTION_COMMAND)
             .expect("Could not get device type");
 
         let device_type = Self::get_command_response(port).expect("Could not reset device");
 
-        println!(
-            "Device type: {}",
+        log::info!(
+            "Detected device type: {}",
             String::from_utf8(device_type)
                 .unwrap_or_default()
                 .replace("CMD", "")
