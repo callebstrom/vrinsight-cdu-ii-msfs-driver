@@ -1,3 +1,5 @@
+#![feature(strict_provenance, layout_for_ptr)]
+
 mod cdu;
 mod keymap;
 mod msfs;
@@ -7,13 +9,15 @@ fn main() {
 
     let keymap = keymap::KeyMap::new();
     let mut cdu = cdu::CDU::new();
-    let msfs = msfs::MSFS::new("VRInsight CDU II MSFS Driver");
+    let mut msfs = msfs::MSFS::new("VRInsight CDU II MSFS Driver");
 
     loop {
         match cdu.read() {
             Ok(message) => {
                 // ATC MODEL
-                let event = keymap.get_event(&"C25C".to_string(), &message);
+
+                let aircraft_icao = msfs.determine_aircraft_type();
+                let event = keymap.get_event(&aircraft_icao, &message);
                 match event {
                     Some(e) => {
                         log::trace!("Sending event {}", e);

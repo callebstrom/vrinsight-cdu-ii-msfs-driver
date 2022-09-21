@@ -12,6 +12,8 @@ serde = { version = "1.0.124", features = ["derive"] }
 serde_yaml = "0.9.13"
 log = "0.4"
 simple_logger = "2.3.0"
+typic = "0.3.0"
+rand = "0.3.18"
 
 [target.wasm32-wasi]
 rustflags = [
