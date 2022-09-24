@@ -100,7 +100,7 @@ impl MSFS {
 
                                     log::trace!("Received ATC_MODEL {}", atc_model);
 
-                                    return atc_model;
+                                    return atc_model.trim().to_string();
                                 }
                             }
                             _ => log::warn!("Unknown defineID received"),
@@ -182,7 +182,7 @@ impl MSFS {
     fn parse_atc_model(dw_data: &AtcModelResult) -> Option<String> {
         let atc_model_raw = std::str::from_utf8(&(*dw_data).atc_model).unwrap();
         log::trace!("Parsing raw ATC MODEL: {}", atc_model_raw);
-        let ac_model_regex = Regex::new(r".*AC_MODEL_(.*)\.0").unwrap();
+        let ac_model_regex = Regex::new(r".*AC_MODEL[_]{0,1}(.*)\.0").unwrap();
         ac_model_regex
             .captures(atc_model_raw)
             .map(|matches| matches.get(1).unwrap())
