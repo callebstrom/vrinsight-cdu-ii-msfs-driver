@@ -1,5 +1,5 @@
 use regex::Regex;
-use std::{borrow::BorrowMut, time::Duration};
+use std::{borrow::BorrowMut, collections::HashMap, time::Duration};
 
 use rand::Rng;
 use simconnect::{
@@ -9,9 +9,12 @@ use simconnect::{
 
 const MOBIFLIGHT_PREFIX: &str = "MobiFlight";
 const ATC_MODEL_DEFINITION_ID: DWORD = 0;
+const GROUP_ID: DWORD = 1;
 
 pub struct MSFS {
     connection: simconnect::SimConnector,
+    event_map: HashMap<String, DWORD>,
+    current_event_id: DWORD,
 }
 
 struct AtcModelResult {
@@ -32,7 +35,11 @@ impl MSFS {
             0,
         ); // Assign a sim variable to a client defined id
 
-        return MSFS { connection };
+        return MSFS {
+            connection,
+            event_map: HashMap::new(),
+            current_event_id: 0,
+        };
     }
 
     fn connect(connection: &mut simconnect::SimConnector, app_name: &str) {
@@ -100,11 +107,7 @@ impl MSFS {
                         }
                     },
                     Ok(simconnect::DispatchResult::Exception(..)) => {
-                        // let error_ptr = e.dwException;
-                        // let error = std::ptr::from_exposed_addr::<u8>(error_ptr as usize);
-                        log::error!(
-                            "Could not determine aircraft type due to SimConnect exception",
-                        );
+                        // Data is not yet ready
                     }
                     Ok(simconnect::DispatchResult::Null) => {
                         log::error!("Could not determine aircraft type: null");
@@ -123,36 +126,53 @@ impl MSFS {
         }
     }
 
-    pub fn send_event(&mut self, event: &String) {
-        let event_id = 0;
-        let group_id = 1;
+    fn register_event(&mut self, event: String) -> DWORD {
         let event_name = format!("{MOBIFLIGHT_PREFIX}.{event}");
-        if !self
+
+        self.current_event_id += 1;
+        let next_event_id = self.current_event_id;
+
+        if self
             .connection
-            .map_client_event_to_sim_event(event_id, event_name.as_str())
+            .map_client_event_to_sim_event(next_event_id, event_name.as_str())
         {
+            self.event_map.insert(event, next_event_id);
+        } else {
             log::error!("Could not register event");
         }
 
         if !self
             .connection
-            .add_client_event_to_notification_group(group_id, event_id, false)
+            .add_client_event_to_notification_group(GROUP_ID, next_event_id, false)
         {
-            panic!("Could not add client event");
+            log::error!("Could not add client event");
         }
 
         if !self
             .connection
-            .set_notification_group_priority(group_id, SIMCONNECT_GROUP_PRIORITY_HIGHEST)
+            .set_notification_group_priority(GROUP_ID, SIMCONNECT_GROUP_PRIORITY_HIGHEST)
         {
-            panic!("Could not add client event");
-        }
+            log::error!("Could not add client event");
+        };
+
+        return next_event_id;
+    }
+
+    pub fn send_event(&mut self, event: String) {
+        let event_id: DWORD = if !self.event_map.contains_key(&event) {
+            self.register_event(event)
+        } else {
+            *self
+                .event_map
+                .get(&event)
+                .expect("event_map changed after container_key check")
+        };
 
         if !self.connection.transmit_client_event(
             SIMCONNECT_OBJECT_ID_USER,
             event_id,
             0,
-            group_id,
+            GROUP_ID,
             SIMCONNECT_EVENT_FLAG_GROUPID_IS_PRIORITY,
         ) {
             panic!("Could not transmit event");

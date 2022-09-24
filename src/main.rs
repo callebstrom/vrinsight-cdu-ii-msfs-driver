@@ -14,12 +14,13 @@ fn main() {
     loop {
         match cdu.read() {
             Ok(message) => {
+                log::trace!("Received key: {}", &message);
                 let aircraft_icao = msfs.determine_aircraft_type();
                 let event = keymap.get_event(&aircraft_icao, &message);
                 match event {
                     Some(e) => {
                         log::trace!("Sending event {}", e);
-                        msfs.send_event(&e);
+                        msfs.send_event(e.clone());
                     }
                     None => {}
                 }
