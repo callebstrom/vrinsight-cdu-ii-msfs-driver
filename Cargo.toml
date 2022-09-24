@@ -14,6 +14,7 @@ log = "0.4"
 simple_logger = "2.3.0"
 typic = "0.3.0"
 rand = "0.3.18"
+regex = "1"
 
 [target.wasm32-wasi]
 rustflags = [

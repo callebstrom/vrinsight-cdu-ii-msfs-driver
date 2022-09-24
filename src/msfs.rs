@@ -1,4 +1,5 @@
-use std::{borrow::BorrowMut, ffi::c_void, thread::sleep, time::Duration};
+use regex::Regex;
+use std::{borrow::BorrowMut, time::Duration};
 
 use rand::Rng;
 use simconnect::{
@@ -13,6 +14,10 @@ pub struct MSFS {
     connection: simconnect::SimConnector,
 }
 
+struct AtcModelResult {
+    atc_model: [u8; 64],
+}
+
 impl MSFS {
     pub fn new(app_name: &str) -> MSFS {
         let mut connection = simconnect::SimConnector::new();
@@ -23,7 +28,7 @@ impl MSFS {
             ATC_MODEL_DEFINITION_ID,
             "ATC MODEL",
             "",
-            simconnect::SIMCONNECT_DATATYPE_SIMCONNECT_DATATYPE_STRING32,
+            simconnect::SIMCONNECT_DATATYPE_SIMCONNECT_DATATYPE_STRING64,
             0,
         ); // Assign a sim variable to a client defined id
 
@@ -54,9 +59,7 @@ impl MSFS {
                     );
                     break;
                 }
-                _ => {
-                    // log::warn!("Received unexpected response in open call: {:#?}", res);
-                }
+                _ => {}
             }
             std::thread::sleep(Duration::from_millis(16));
         }
@@ -81,41 +84,28 @@ impl MSFS {
                         match simobject_data.dwDefineID {
                             ATC_MODEL_DEFINITION_ID => {
                                 if simobject_data.dwRequestID == request_id {
-                                    let data = simobject_data.dwData;
+                                    let response = &simobject_data;
+                                    let dw_data = std::ptr::addr_of!(response.dwData)
+                                        as *const AtcModelResult;
 
-                                    let p_data = &simobject_data;
+                                    let atc_model = Self::parse_atc_model(&*dw_data)
+                                        .unwrap_or("Unknown".to_string());
 
-                                    let start = data as *mut c_void;
+                                    log::trace!("Received ATC_MODEL {}", atc_model);
 
-                                    let mut result: Vec<i8> = vec![0; 128];
-                                    let result_start = result.as_mut_ptr();
-                                    let mut result_size: u32 = 0;
-
-                                    let cb_data = std::mem::size_of_val(&simobject_data) as u32;
-
-                                    simconnect::SimConnect_RetrieveString(
-                                        std::mem::transmute(p_data),
-                                        cb_data,
-                                        start,
-                                        std::ptr::addr_of!(result_start).cast_mut(),
-                                        std::ptr::addr_of_mut!(result_size),
-                                    );
-
-                                    log::trace!("ATC_MODEL result size {:#?} bytes", result_size);
-                                    break;
+                                    return atc_model;
                                 }
                             }
                             _ => log::warn!("Unknown defineID received"),
                         }
                     },
-                    Ok(simconnect::DispatchResult::Exception(e)) => unsafe {
-                        let error_ptr = e.dwException;
-                        let error = std::ptr::from_exposed_addr::<u8>(error_ptr as usize);
+                    Ok(simconnect::DispatchResult::Exception(..)) => {
+                        // let error_ptr = e.dwException;
+                        // let error = std::ptr::from_exposed_addr::<u8>(error_ptr as usize);
                         log::error!(
-                            "Could not determine aircraft type due to SimConnect exception: {:#?}",
-                            *error
+                            "Could not determine aircraft type due to SimConnect exception",
                         );
-                    },
+                    }
                     Ok(simconnect::DispatchResult::Null) => {
                         log::error!("Could not determine aircraft type: null");
                     }
@@ -129,9 +119,8 @@ impl MSFS {
             }
         } else {
             log::error!("Could not determine aircraft type");
+            return "".to_string();
         }
-
-        return String::from("C25C");
     }
 
     pub fn send_event(&mut self, event: &String) {
@@ -142,7 +131,7 @@ impl MSFS {
             .connection
             .map_client_event_to_sim_event(event_id, event_name.as_str())
         {
-            panic!("Could not register event");
+            log::error!("Could not register event");
         }
 
         if !self
@@ -168,5 +157,15 @@ impl MSFS {
         ) {
             panic!("Could not transmit event");
         }
+    }
+
+    fn parse_atc_model(dw_data: &AtcModelResult) -> Option<String> {
+        let atc_model_raw = std::str::from_utf8(&(*dw_data).atc_model).unwrap();
+        log::trace!("Parsing raw ATC MODEL: {}", atc_model_raw);
+        let ac_model_regex = Regex::new(r".*AC_MODEL_(.*)\.0").unwrap();
+        ac_model_regex
+            .captures(atc_model_raw)
+            .map(|matches| matches.get(1).unwrap())
+            .map(|first_match| first_match.as_str().to_string())
     }
 }
