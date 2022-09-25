@@ -1,29 +1,77 @@
 mappings:
   B737:
-    LSKL1: EVT_CDU_L_L1
-    LSKL2: EVT_CDU_L_L2
-    LSKL3: EVT_CDU_L_L3
-    LSKL4: EVT_CDU_L_L4
-    LSKL5: EVT_CDU_L_L5
-    LSKL6: EVT_CDU_L_L6
-    LSKR1: EVT_CDU_L_R1
-    LSKR2: EVT_CDU_L_R2
-    LSKR3: EVT_CDU_L_R3
-    LSKR4: EVT_CDU_L_R4
-    LSKR5: EVT_CDU_L_R5
-    LSKR6: EVT_CDU_L_R6
-    KEY0: EVT_CDU_L_0
-    KEY1: EVT_CDU_L_1
-    KEY2: EVT_CDU_L_2
-    KEY3: EVT_CDU_L_3
-    KEY4: EVT_CDU_L_4
-    KEY5: EVT_CDU_L_5
-    KEY6: EVT_CDU_L_6
-    KEY7: EVT_CDU_L_7
-    KEY8: EVT_CDU_L_8
-    KEY9: EVT_CDU_L_9
-    KEY+: EVT_CDU_L_PLUS_MINUS
-    KEY.: EVT_CDU_L_DOT
+    LSKL1:
+      event: ROTOR_BRAKE
+      value: 53401
+    LSKL2:
+      event: ROTOR_BRAKE
+      value: 53501
+    LSKL3:
+      event: ROTOR_BRAKE
+      value: 53601
+    LSKL4:
+      event: ROTOR_BRAKE
+      value: 53701
+    LSKL5:
+      event: ROTOR_BRAKE
+      value: 53801
+    LSKL6:
+      event: ROTOR_BRAKE
+      value: 53901
+    LSKR1:
+      event: ROTOR_BRAKE
+      value: 54001
+    LSKR2:
+      event: ROTOR_BRAKE
+      value: 54101
+    LSKR3:
+      event: ROTOR_BRAKE
+      value: 54201
+    LSKR4:
+      event: ROTOR_BRAKE
+      value: 54301
+    LSKR5:
+      event: ROTOR_BRAKE
+      value: 54401
+    LSKR6:
+      event: ROTOR_BRAKE
+      value: 54501
+    KEY0:
+      event: ROTOR_BRAKE
+      value: 57101
+    KEY1:
+      event: ROTOR_BRAKE
+      value: 56101
+    KEY2:
+      event: ROTOR_BRAKE
+      value: 56201
+    KEY3:
+      event: ROTOR_BRAKE
+      value: 56301
+    KEY4:
+      event: ROTOR_BRAKE
+      value: 56401
+    KEY5:
+      event: ROTOR_BRAKE
+      value: 56501
+    KEY6:
+      event: ROTOR_BRAKE
+      value: 56601
+    KEY7:
+      event: ROTOR_BRAKE
+      value: 56701
+    KEY8:
+      event: ROTOR_BRAKE
+      value: 56801
+    KEY9:
+      event: ROTOR_BRAKE
+      value: 56901
+    KEY+:
+      event: ROTOR_BRAKE
+      value: 57201
+    KEY.:
+      event: ROTOR_BRAKE
+      value: 57001
     KEYA: 
       event: ROTOR_BRAKE
       value: 57301
@@ -54,43 +102,111 @@ mappings:
     KEYJ:
       event: ROTOR_BRAKE
       value: 58201
-    KEYK: EVT_CDU_L_K
-    KEYL: EVT_CDU_L_L
-    KEYM: EVT_CDU_L_M
-    KEYN: EVT_CDU_L_N
-    KEYO: EVT_CDU_L_O
-    KEYP: EVT_CDU_L_P
-    KEYQ: EVT_CDU_L_Q
-    KEYR: EVT_CDU_L_R
-    KEYS: EVT_CDU_L_S
-    KEYT: EVT_CDU_L_T
-    KEYU: EVT_CDU_L_U
-    KEYV: EVT_CDU_L_V
-    KEYW: EVT_CDU_L_W
-    KEYX: EVT_CDU_L_X
-    KEYY: EVT_CDU_L_Y
-    KEYZ: EVT_CDU_L_Z
-    KEYSP: EVT_CDU_L_SPACE
-    KEYDEL: EVT_CDU_L_DEL
-    KEY/: EVT_CDU_L_SLASH
-    
-    KEYCLR: EVT_CDU_L_CLR
-
-    FUN11: EVT_CDU_L_INIT_REF
-    FUN12: EVT_CDU_L_RTE
-    FUN13: EVT_CDU_L_CLB
-    FUN14: EVT_CDU_L_CRZ
-    FUN15: EVT_CDU_L_DES
-    FUN21: EVT_CDU_L_MENU
-    FUN22: EVT_CDU_L_LEGS
-    FUN23: EVT_CDU_L_DEP_ARR
-    FUN24: EVT_CDU_L_HOLD
-    FUN25: EVT_CDU_L_PROG
-    FUN26: EVT_CDU_L_EXEC
-    FUN31: EVT_CDU_L_N1_LIMIT
-    FUN32: EVT_CDU_L_FIX
-    FUN41: EVT_CDU_L_PREV_PAGE
-    FUN42: EVT_CDU_L_NEXT_PAGE
+    KEYK:
+      event: ROTOR_BRAKE
+      value: 58301
+    KEYL:
+      event: ROTOR_BRAKE
+      value: 58401
+    KEYM:
+      event: ROTOR_BRAKE
+      value: 58501
+    KEYN:
+      event: ROTOR_BRAKE
+      value: 58601
+    KEYO:
+      event: ROTOR_BRAKE
+      value: 58701
+    KEYP:
+      event: ROTOR_BRAKE
+      value: 58801
+    KEYQ:
+      event: ROTOR_BRAKE
+      value: 58901
+    KEYR:
+      event: ROTOR_BRAKE
+      value: 59001
+    KEYS:
+      event: ROTOR_BRAKE
+      value: 59101
+    KEYT:
+      event: ROTOR_BRAKE
+      value: 59201
+    KEYU:
+      event: ROTOR_BRAKE
+      value: 59301
+    KEYV:
+      event: ROTOR_BRAKE
+      value: 59401
+    KEYW:
+      event: ROTOR_BRAKE
+      value: 59501
+    KEYX:
+      event: ROTOR_BRAKE
+      value: 59601
+    KEYY:
+      event: ROTOR_BRAKE
+      value: 59701
+    KEYZ:
+      event: ROTOR_BRAKE
+      value: 59801
+    KEYSP:
+      event: ROTOR_BRAKE
+      value: 59901
+    KEYDEL:
+      event: ROTOR_BRAKE
+      value: 60001
+    KEY/:
+      event: ROTOR_BRAKE
+      value: 60101
+    KEYCLR:
+      event: ROTOR_BRAKE
+      value: 60201
+    FUN11:
+      event: ROTOR_BRAKE
+      value: 54601
+    FUN12:
+      event: ROTOR_BRAKE
+      value: 54701
+    FUN13:
+      event: ROTOR_BRAKE
+      value: 54801
+    FUN14:
+      event: ROTOR_BRAKE
+      value: 54901
+    FUN15:
+      event: ROTOR_BRAKE
+      value: 55001
+    FUN21:
+      event: ROTOR_BRAKE
+      value: 55101
+    FUN22:
+      event: ROTOR_BRAKE
+      value: 55201
+    FUN23:
+      event: ROTOR_BRAKE
+      value: 55301
+    FUN24:
+      event: ROTOR_BRAKE
+      value: 55401
+    FUN25:
+      event: ROTOR_BRAKE
+      value: 55501
+    FUN26:
+      event: ROTOR_BRAKE
+      value: 55601
+    FUN31:
+      event: ROTOR_BRAKE
+      value: 55701
+    FUN32:
+      event: ROTOR_BRAKE
+      value: 55801
+    FUN41:
+      event: ROTOR_BRAKE
+      value: 55901
+    FUN42:
+      event: ROTOR_BRAKE
+      value: 56001
   BA46:
     LSKL1: CJ4_FMC_1_BTN_L1
     LSKL2: CJ4_FMC_1_BTN_L2
@@ -144,9 +260,7 @@ mappings:
     KEYZ: CJ4_FMC_1_BTN_Z
     KEYSP: CJ4_FMC_1_BTN_SP
     KEY/: CJ4_FMC_1_BTN_DIV
-    
     KEYCLR: CJ4_FMC_1_BTN_CLR
-
     FUN11: CJ4_FMC_1_BTN_PERF
     FUN12: CJ4_FMC_1_BTN_FPLN
     FUN16: CJ4_FMC_1_BTN_TUN
@@ -211,9 +325,7 @@ mappings:
     KEYZ: CJ4_FMC_1_BTN_Z
     KEYSP: CJ4_FMC_1_BTN_SP
     KEY/: CJ4_FMC_1_BTN_DIV
-    
     KEYCLR: CJ4_FMC_1_BTN_CLR
-
     FUN11: CJ4_FMC_1_BTN_PERF
     FUN12: CJ4_FMC_1_BTN_FPLN
     FUN16: CJ4_FMC_1_BTN_TUN
