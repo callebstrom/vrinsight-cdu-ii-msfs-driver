@@ -2,14 +2,18 @@ use log::info;
 
 use std::{collections::HashMap, fs::File, io::Read};
 
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
-struct Mappings {}
+#[derive(Debug, Deserialize)]
+#[serde(untagged)]
+pub enum Event {
+    WithValue { event: String, value: u32 },
+    WithoutValue(String),
+}
 
 #[derive(Debug, Deserialize)]
 pub struct KeyMap {
-    mappings: HashMap<String, HashMap<String, String>>,
+    mappings: HashMap<String, HashMap<String, Event>>,
 }
 
 impl KeyMap {
@@ -21,12 +25,11 @@ impl KeyMap {
 
         let key_map = serde_yaml::from_str::<KeyMap>(&contents).expect("Could not read keymap");
 
-        info!("Read keymap");
-
         return key_map;
     }
 
-    pub fn get_event(&self, aircraft: &String, key: &String) -> Option<&String> {
+    pub fn get_event(&self, aircraft: &String, key: &String) -> Option<&Event> {
+        info!("Read keymap: {:#?}", aircraft);
         self.mappings.get(aircraft).map(|a| a.get(key)).flatten()
     }
 }

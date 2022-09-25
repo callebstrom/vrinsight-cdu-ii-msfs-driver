@@ -100,7 +100,7 @@ impl MSFS {
 
                                     log::trace!("Received ATC_MODEL {}", atc_model);
 
-                                    return atc_model.trim().to_string();
+                                    return atc_model.trim().to_string().replace("\0", "");
                                 }
                             }
                             _ => log::warn!("Unknown defineID received"),
@@ -127,7 +127,8 @@ impl MSFS {
     }
 
     fn register_event(&mut self, event: String) -> DWORD {
-        let event_name = format!("{MOBIFLIGHT_PREFIX}.{event}");
+        let event_name = format!("{event}");
+        // let event_name = format!("{MOBIFLIGHT_PREFIX}.{event}");
 
         self.current_event_id += 1;
         let next_event_id = self.current_event_id;
@@ -159,6 +160,12 @@ impl MSFS {
     }
 
     pub fn send_event(&mut self, event: String) {
+        self.send_event_with_value(event, 0);
+    }
+
+    pub fn send_event_with_value(&mut self, event: String, value: DWORD) {
+        log::trace!("Sending event \"{}\" with value \"{}\"", event, value);
+
         let event_id: DWORD = if !self.event_map.contains_key(&event) {
             self.register_event(event)
         } else {
@@ -171,7 +178,7 @@ impl MSFS {
         if !self.connection.transmit_client_event(
             SIMCONNECT_OBJECT_ID_USER,
             event_id,
-            0,
+            value,
             GROUP_ID,
             SIMCONNECT_EVENT_FLAG_GROUPID_IS_PRIORITY,
         ) {
@@ -187,5 +194,6 @@ impl MSFS {
             .captures(atc_model_raw)
             .map(|matches| matches.get(1).unwrap())
             .map(|first_match| first_match.as_str().to_string())
+            .or_else(|| Some(atc_model_raw.trim().to_string()))
     }
 }

@@ -1,4 +1,96 @@
 mappings:
+  B737:
+    LSKL1: EVT_CDU_L_L1
+    LSKL2: EVT_CDU_L_L2
+    LSKL3: EVT_CDU_L_L3
+    LSKL4: EVT_CDU_L_L4
+    LSKL5: EVT_CDU_L_L5
+    LSKL6: EVT_CDU_L_L6
+    LSKR1: EVT_CDU_L_R1
+    LSKR2: EVT_CDU_L_R2
+    LSKR3: EVT_CDU_L_R3
+    LSKR4: EVT_CDU_L_R4
+    LSKR5: EVT_CDU_L_R5
+    LSKR6: EVT_CDU_L_R6
+    KEY0: EVT_CDU_L_0
+    KEY1: EVT_CDU_L_1
+    KEY2: EVT_CDU_L_2
+    KEY3: EVT_CDU_L_3
+    KEY4: EVT_CDU_L_4
+    KEY5: EVT_CDU_L_5
+    KEY6: EVT_CDU_L_6
+    KEY7: EVT_CDU_L_7
+    KEY8: EVT_CDU_L_8
+    KEY9: EVT_CDU_L_9
+    KEY+: EVT_CDU_L_PLUS_MINUS
+    KEY.: EVT_CDU_L_DOT
+    KEYA: 
+      event: ROTOR_BRAKE
+      value: 57301
+    KEYB:
+      event: ROTOR_BRAKE
+      value: 57401
+    KEYC:
+      event: ROTOR_BRAKE
+      value: 57501
+    KEYD:
+      event: ROTOR_BRAKE
+      value: 57601
+    KEYE:
+      event: ROTOR_BRAKE
+      value: 57701
+    KEYF:
+      event: ROTOR_BRAKE
+      value: 57801
+    KEYG:
+      event: ROTOR_BRAKE
+      value: 57801
+    KEYH:
+      event: ROTOR_BRAKE
+      value: 58001
+    KEYI:
+      event: ROTOR_BRAKE
+      value: 58101
+    KEYJ:
+      event: ROTOR_BRAKE
+      value: 58201
+    KEYK: EVT_CDU_L_K
+    KEYL: EVT_CDU_L_L
+    KEYM: EVT_CDU_L_M
+    KEYN: EVT_CDU_L_N
+    KEYO: EVT_CDU_L_O
+    KEYP: EVT_CDU_L_P
+    KEYQ: EVT_CDU_L_Q
+    KEYR: EVT_CDU_L_R
+    KEYS: EVT_CDU_L_S
+    KEYT: EVT_CDU_L_T
+    KEYU: EVT_CDU_L_U
+    KEYV: EVT_CDU_L_V
+    KEYW: EVT_CDU_L_W
+    KEYX: EVT_CDU_L_X
+    KEYY: EVT_CDU_L_Y
+    KEYZ: EVT_CDU_L_Z
+    KEYSP: EVT_CDU_L_SPACE
+    KEYDEL: EVT_CDU_L_DEL
+    KEY/: EVT_CDU_L_SLASH
+    
+    KEYCLR: EVT_CDU_L_CLR
+
+    FUN11: EVT_CDU_L_INIT_REF
+    FUN12: EVT_CDU_L_RTE
+    FUN13: EVT_CDU_L_CLB
+    FUN14: EVT_CDU_L_CRZ
+    FUN15: EVT_CDU_L_DES
+    FUN21: EVT_CDU_L_MENU
+    FUN22: EVT_CDU_L_LEGS
+    FUN23: EVT_CDU_L_DEP_ARR
+    FUN24: EVT_CDU_L_HOLD
+    FUN25: EVT_CDU_L_PROG
+    FUN26: EVT_CDU_L_EXEC
+    FUN31: EVT_CDU_L_N1_LIMIT
+    FUN32: EVT_CDU_L_FIX
+    FUN41: EVT_CDU_L_PREV_PAGE
+    FUN42: EVT_CDU_L_NEXT_PAGE
   BA46:
     LSKL1: CJ4_FMC_1_BTN_L1
     LSKL2: CJ4_FMC_1_BTN_L2
@@ -51,7 +143,7 @@ mappings:
     KEYY: CJ4_FMC_1_BTN_Y
     KEYZ: CJ4_FMC_1_BTN_Z
     KEYSP: CJ4_FMC_1_BTN_SP
-    KEY/: CJ4_FMC_1_BTN_SLASH
+    KEY/: CJ4_FMC_1_BTN_DIV
     
     KEYCLR: CJ4_FMC_1_BTN_CLR
 
@@ -118,7 +210,7 @@ mappings:
     KEYY: CJ4_FMC_1_BTN_Y
     KEYZ: CJ4_FMC_1_BTN_Z
     KEYSP: CJ4_FMC_1_BTN_SP
-    KEY/: CJ4_FMC_1_BTN_SLASH
+    KEY/: CJ4_FMC_1_BTN_DIV
     
     KEYCLR: CJ4_FMC_1_BTN_CLR
 

@@ -10,6 +10,7 @@ serialport = "3.2.0"
 simconnect = "0.1.3"
 serde = { version = "1.0.124", features = ["derive"] }
 serde_yaml = "0.9.13"
+serde_derive = "1.0.145"
 log = "0.4"
 simple_logger = "2.3.0"
 typic = "0.3.0"

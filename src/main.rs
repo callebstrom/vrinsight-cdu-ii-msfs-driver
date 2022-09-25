@@ -1,5 +1,8 @@
 #![feature(strict_provenance, layout_for_ptr)]
 
+#[macro_use]
+extern crate serde;
+
 mod cdu;
 mod keymap;
 mod msfs;
@@ -18,10 +21,14 @@ fn main() {
                 let aircraft_icao = msfs.determine_aircraft_type();
                 let event = keymap.get_event(&aircraft_icao, &message);
                 match event {
-                    Some(e) => {
-                        log::trace!("Sending event {}", e);
-                        msfs.send_event(e.clone());
-                    }
+                    Some(e) => match e {
+                        keymap::Event::WithoutValue(event) => {
+                            msfs.send_event(event.clone());
+                        }
+                        keymap::Event::WithValue { event, value } => {
+                            msfs.send_event_with_value((*event).clone(), *value);
+                        }
+                    },
                     None => {}
                 }
             }
