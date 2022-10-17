@@ -3,16 +3,22 @@
 #[macro_use]
 extern crate serde;
 
+use std::time::{Instant};
+
 mod cdu;
 mod keymap;
 mod msfs;
+
+const KEEP_ALIVE_INTERVAL: u128 = 5000;
 
 fn main() {
     simple_logger::SimpleLogger::new().env().init().unwrap();
 
     let keymap = keymap::KeyMap::new();
-    let mut cdu = cdu::CDU::new();
+    let mut cdu = cdu::CDU::new(keymap.get_port());
     let mut msfs = msfs::MSFS::new("VRInsight CDU II MSFS Driver");
+
+    let mut last_keep_alive = Instant::now();
 
     loop {
         match cdu.read() {
@@ -34,5 +40,13 @@ fn main() {
             }
             Err(_) => {}
         }
+
+        let elapsed_since_keep_alive = Instant::now() - last_keep_alive;
+
+        if elapsed_since_keep_alive.as_millis() >= KEEP_ALIVE_INTERVAL {
+            cdu.keep_alive();
+            last_keep_alive = Instant::now();
+        }
+
     }
 }

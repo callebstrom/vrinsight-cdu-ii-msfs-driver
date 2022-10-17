@@ -13,6 +13,7 @@ pub enum Event {
 
 #[derive(Debug, Deserialize)]
 pub struct KeyMap {
+    port: String,
     mappings: HashMap<String, HashMap<String, Event>>,
 }
 
@@ -31,5 +32,9 @@ impl KeyMap {
     pub fn get_event(&self, aircraft: &String, key: &String) -> Option<&Event> {
         info!("Read keymap: {:#?}", aircraft);
         self.mappings.get(aircraft).map(|a| a.get(key)).flatten()
+    }
+
+    pub fn get_port(&self) -> &String {
+        return &self.port;
     }
 }

@@ -1,3 +1,4 @@
+port: COM7
 mappings:
   B737:
     LSKL1:
@@ -92,7 +93,7 @@ mappings:
       value: 57801
     KEYG:
       event: ROTOR_BRAKE
-      value: 57801
+      value: 57901
     KEYH:
       event: ROTOR_BRAKE
       value: 58001

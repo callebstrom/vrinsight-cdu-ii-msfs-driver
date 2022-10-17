@@ -11,20 +11,43 @@ pub struct CDU {
 }
 
 impl CDU {
-    pub fn new() -> Self {
-        let mut port = Self::connect_serial();
+    pub fn new(port_name: &str) -> Self {
+        let mut port = Self::connect_serial(port_name);
         Self::configure(&mut *port);
 
         return Self { port };
     }
 
-    fn connect_serial() -> Box<dyn serialport::SerialPort> {
-        let ports = serialport::available_ports().expect("Could not discover ports");
+    pub fn keep_alive(&mut self) {
+        self.port
+            .write(GET_VERSION_COMMAND)
+            .expect("Failed to send keep-alive");
 
-        let port = ports
-            .into_iter()
-            .find(|p| p.port_name == "COM7")
-            .expect("No ports found!");
+        loop {
+            if Self::get_command_response(self.port.as_mut()).is_ok() {
+                break;
+            }
+        }
+    }
+
+    fn wait_for_port(port_name: &str) -> serialport::SerialPortInfo {
+        loop {
+            let ports = serialport::available_ports().expect("Could not discover ports");
+
+            let maybe_port = ports.into_iter().find(|p| p.port_name == port_name);
+            if maybe_port.is_some() {
+                return maybe_port.expect("Could not find port");
+            }
+
+            std::thread::sleep(Duration::from_secs(1));
+        }
+
+    }
+
+    fn connect_serial(port_name: &str) -> Box<dyn serialport::SerialPort> {
+        
+        log::info!("Waiting for COM port");
+        let port = Self::wait_for_port(port_name);
 
         let port = serialport::open_with_settings(
             &port.port_name,
