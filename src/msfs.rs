@@ -126,9 +126,8 @@ impl MSFS {
         }
     }
 
-    fn register_event(&mut self, event: String) -> DWORD {
-        let event_name = format!("{event}");
-        // let event_name = format!("{MOBIFLIGHT_PREFIX}.{event}");
+    fn register_event(&mut self, event_name: String) -> DWORD {
+        log::trace!("Registering event \"{}\"", event_name);
 
         self.current_event_id += 1;
         let next_event_id = self.current_event_id;
@@ -137,7 +136,7 @@ impl MSFS {
             .connection
             .map_client_event_to_sim_event(next_event_id, event_name.as_str())
         {
-            self.event_map.insert(event, next_event_id);
+            self.event_map.insert(event_name.to_string(), next_event_id);
         } else {
             log::error!("Could not register event");
         }
@@ -164,14 +163,22 @@ impl MSFS {
     }
 
     pub fn send_event_with_value(&mut self, event: String, value: DWORD) {
-        log::trace!("Sending event \"{}\" with value \"{}\"", event, value);
+        let is_html_event = &event.starts_with("H:");
+        let event_name = if *is_html_event {
+            let event_without_prefix = event.split_at(2).1;
+            format!("{MOBIFLIGHT_PREFIX}.{event_without_prefix}")
+        } else {
+            event.clone()
+        };
+        
+        log::trace!("Sending event \"{}\" with value \"{}\"", event_name, value);
 
-        let event_id: DWORD = if !self.event_map.contains_key(&event) {
-            self.register_event(event)
+        let event_id: DWORD = if !self.event_map.contains_key(&event_name) {
+            self.register_event(event_name)
         } else {
             *self
                 .event_map
-                .get(&event)
+                .get(&event_name)
                 .expect("event_map changed after container_key check")
         };
 

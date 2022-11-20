@@ -3,7 +3,7 @@
 #[macro_use]
 extern crate serde;
 
-use std::time::{Instant};
+use std::time::Instant;
 
 mod cdu;
 mod keymap;
@@ -25,6 +25,7 @@ fn main() {
             Ok(message) => {
                 log::trace!("Received key: {}", &message);
                 let aircraft_icao = msfs.determine_aircraft_type();
+                log::trace!("Received aircraft key: {}", aircraft_icao);
                 let event = keymap.get_event(&aircraft_icao, &message);
                 match event {
                     Some(e) => match e {
@@ -47,6 +48,5 @@ fn main() {
             cdu.keep_alive();
             last_keep_alive = Instant::now();
         }
-
     }
 }
