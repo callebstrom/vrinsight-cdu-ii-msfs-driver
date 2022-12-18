@@ -10,6 +10,17 @@ mod keymap;
 mod msfs;
 
 const KEEP_ALIVE_INTERVAL: u128 = 5000;
+                        
+fn process_event(event: &keymap::Event, msfs: &mut msfs::MSFS) {
+    match event {
+        keymap::Event::WithoutValue(eventWithoutValue) => {
+            msfs.send_event(eventWithoutValue.clone());
+        }
+        keymap::Event::WithValue(eventWithValue) => {
+            msfs.send_event_with_value(eventWithValue.event.clone(), eventWithValue.value);
+        }
+    }
+}
 
 fn main() {
     simple_logger::SimpleLogger::new().env().init().unwrap();
@@ -26,15 +37,14 @@ fn main() {
                 log::trace!("Received key: {}", &message);
                 let aircraft_icao = msfs.determine_aircraft_type();
                 log::trace!("Received aircraft key: {}", aircraft_icao);
-                let event = keymap.get_event(&aircraft_icao, &message);
-                match event {
-                    Some(e) => match e {
-                        keymap::Event::WithoutValue(event) => {
-                            msfs.send_event(event.clone());
-                        }
-                        keymap::Event::WithValue { event, value } => {
-                            msfs.send_event_with_value((*event).clone(), *value);
-                        }
+
+                match keymap.get_event(&aircraft_icao, &message) {
+                    Some(eventOrSequence) => match eventOrSequence {
+                        keymap::EventOrSequence::Single(event) => {
+                            process_event(event, &mut msfs);
+                        },
+                        keymap::EventOrSequence::Sequence(sequence) => {},
+                        
                     },
                     None => {}
                 }

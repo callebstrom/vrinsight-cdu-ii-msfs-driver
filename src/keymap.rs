@@ -5,16 +5,29 @@ use std::{collections::HashMap, fs::File, io::Read};
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
+pub struct EventWithValue {
+    pub event: String,
+    pub value: u32
+}
+
+#[derive(Debug, Deserialize)]
 #[serde(untagged)]
 pub enum Event {
-    WithValue { event: String, value: u32 },
+    WithValue(EventWithValue),
     WithoutValue(String),
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(untagged)]
+pub enum EventOrSequence {
+    Single(Event),
+    Sequence(Vec<Event>)
 }
 
 #[derive(Debug, Deserialize)]
 pub struct KeyMap {
     port: String,
-    mappings: HashMap<String, HashMap<String, Event>>,
+    mappings: HashMap<String, HashMap<String, EventOrSequence>>,
 }
 
 impl KeyMap {
@@ -29,7 +42,7 @@ impl KeyMap {
         return key_map;
     }
 
-    pub fn get_event(&self, aircraft: &String, key: &String) -> Option<&Event> {
+    pub fn get_event(&self, aircraft: &String, key: &String) -> Option<&EventOrSequence> {
         info!("Read keymap: {:#?}", aircraft);
         self.mappings.get(aircraft).map(|a| a.get(key)).flatten()
     }
