@@ -11,23 +11,29 @@ pub struct EventWithValue {
 }
 
 #[derive(Debug, Deserialize)]
-#[serde(untagged)]
-pub enum Event {
-    WithValue(EventWithValue),
-    WithoutValue(String),
+pub struct Delay {
+    pub delay: u64
 }
 
 #[derive(Debug, Deserialize)]
 #[serde(untagged)]
-pub enum EventOrSequence {
-    Single(Event),
-    Sequence(Vec<Event>)
+pub enum Action {
+    EventWithValue(EventWithValue),
+    EventWithoutValue(String),
+    Delay(Delay)
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(untagged)]
+pub enum ActionOrActionSequence {
+    Single(Action),
+    Sequence(Vec<Action>),
 }
 
 #[derive(Debug, Deserialize)]
 pub struct KeyMap {
     port: String,
-    mappings: HashMap<String, HashMap<String, EventOrSequence>>,
+    mappings: HashMap<String, HashMap<String, ActionOrActionSequence>>,
 }
 
 impl KeyMap {
@@ -37,12 +43,10 @@ impl KeyMap {
         file.read_to_string(&mut contents)
             .expect("Unable to read the file");
 
-        let key_map = serde_yaml::from_str::<KeyMap>(&contents).expect("Could not read keymap");
-
-        return key_map;
+        serde_yaml::from_str::<KeyMap>(&contents).expect("Could not read keymap")
     }
 
-    pub fn get_event(&self, aircraft: &String, key: &String) -> Option<&EventOrSequence> {
+    pub fn get_event(&self, aircraft: &String, key: &String) -> Option<&ActionOrActionSequence> {
         info!("Read keymap: {:#?}", aircraft);
         self.mappings.get(aircraft).map(|a| a.get(key)).flatten()
     }

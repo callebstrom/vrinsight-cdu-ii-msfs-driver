@@ -226,8 +226,11 @@ mappings:
       event: ROTOR_BRAKE
       value: 60101
     KEYCLR:
-      event: ROTOR_BRAKE
-      value: 60201
+      - event: ROTOR_BRAKE
+        value: 60201
+      - delay: 250
+      - event: ROTOR_BRAKE
+        value: 60204
     FUN11:
       event: ROTOR_BRAKE
       value: 54601

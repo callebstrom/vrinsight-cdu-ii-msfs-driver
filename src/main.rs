@@ -3,7 +3,7 @@
 #[macro_use]
 extern crate serde;
 
-use std::time::Instant;
+use std::{time::{Instant, self}, thread};
 
 mod cdu;
 mod keymap;
@@ -11,13 +11,16 @@ mod msfs;
 
 const KEEP_ALIVE_INTERVAL: u128 = 5000;
                         
-fn process_event(event: &keymap::Event, msfs: &mut msfs::MSFS) {
+fn process_event(event: &keymap::Action, msfs: &mut msfs::MSFS) {
     match event {
-        keymap::Event::WithoutValue(eventWithoutValue) => {
+        keymap::Action::EventWithoutValue(eventWithoutValue) => {
             msfs.send_event(eventWithoutValue.clone());
         }
-        keymap::Event::WithValue(eventWithValue) => {
+        keymap::Action::EventWithValue(eventWithValue) => {
             msfs.send_event_with_value(eventWithValue.event.clone(), eventWithValue.value);
+        }
+        keymap::Action::Delay(delay) => {
+            thread::sleep(time::Duration::from_millis(delay.delay));
         }
     }
 }
@@ -40,10 +43,12 @@ fn main() {
 
                 match keymap.get_event(&aircraft_icao, &message) {
                     Some(eventOrSequence) => match eventOrSequence {
-                        keymap::EventOrSequence::Single(event) => {
-                            process_event(event, &mut msfs);
+                        keymap::ActionOrActionSequence::Single(action) => {
+                            process_event(action, &mut msfs);
                         },
-                        keymap::EventOrSequence::Sequence(sequence) => {},
+                        keymap::ActionOrActionSequence::Sequence(sequence) => {
+                            sequence.iter().for_each(|action| process_event(action, &mut msfs));
+                        },
                         
                     },
                     None => {}
