@@ -166,6 +166,8 @@ impl MSFS {
         let is_html_event = &event.starts_with("H:");
         let event_name = if *is_html_event {
             let event_without_prefix = event.split_at(2).1;
+            // HTML events are sent via Mobiflight WASM module as there is no native SimConnect way of sending
+            // these types of events
             format!("{MOBIFLIGHT_PREFIX}.{event_without_prefix}")
         } else {
             event.clone()
