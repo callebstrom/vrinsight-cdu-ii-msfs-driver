@@ -101,7 +101,7 @@ impl CDU {
     }
 
     pub fn read<'life>(&mut self) -> Result<String, std::io::Error> {
-        let mut buf: Vec<u8> = vec![0; 8];
+        let mut buf: Vec<u8> = vec![12; 8];
 
         return self
             .port

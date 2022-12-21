@@ -38,6 +38,7 @@ fn main() {
         match cdu.read() {
             Ok(message) => {
                 log::trace!("Received key: {}", &message);
+
                 let aircraft_icao = msfs.determine_aircraft_type();
                 log::trace!("Received aircraft key: {}", aircraft_icao);
 
@@ -53,6 +54,8 @@ fn main() {
                     },
                     None => {}
                 }
+
+                cdu.keep_alive();
             }
             Err(_) => {}
         }
