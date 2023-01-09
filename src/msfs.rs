@@ -1,5 +1,5 @@
 use regex::Regex;
-use std::{borrow::BorrowMut, collections::HashMap, time::Duration};
+use std::{borrow::BorrowMut, collections::HashMap, os::raw::c_void, time::Duration};
 
 use rand::Rng;
 use simconnect::{
@@ -14,7 +14,9 @@ const GROUP_ID: DWORD = 1;
 pub struct MSFS {
     connection: simconnect::SimConnector,
     event_map: HashMap<String, DWORD>,
+    data_definition_map: HashMap<String, DWORD>,
     current_event_id: DWORD,
+    current_data_definition_id: DWORD,
 }
 
 struct AtcModelResult {
@@ -38,7 +40,9 @@ impl MSFS {
         return MSFS {
             connection,
             event_map: HashMap::new(),
+            data_definition_map: HashMap::new(),
             current_event_id: 0,
+            current_data_definition_id: 0,
         };
     }
 
@@ -158,6 +162,38 @@ impl MSFS {
         return next_event_id;
     }
 
+    fn register_data_definition(&mut self, var: String) -> DWORD {
+        log::trace!("Registering data definition \"{}\"", var);
+
+        self.current_event_id += 1;
+        let next_data_definition_id = self.current_data_definition_id;
+
+        if self.connection.add_data_definition(
+            next_data_definition_id,
+            var.as_str(),
+            "",
+            simconnect::SIMCONNECT_DATATYPE_SIMCONNECT_DATATYPE_INT32,
+            0,
+        ) {
+            self.data_definition_map
+                .insert(var.to_string(), next_data_definition_id);
+        } else {
+            log::error!("Could not register data definition");
+        }
+
+        if self
+            .connection
+            .map_client_data_name_to_id(var.as_str(), next_data_definition_id)
+        {
+            self.data_definition_map
+                .insert(var.to_string(), next_data_definition_id);
+        } else {
+            log::error!("Could not register data definition");
+        }
+
+        return next_data_definition_id;
+    }
+
     pub fn send_event(&mut self, event: String) {
         self.send_event_with_value(event, 0);
     }
@@ -172,7 +208,7 @@ impl MSFS {
         } else {
             event.clone()
         };
-        
+
         log::trace!("Sending event \"{}\" with value \"{}\"", event_name, value);
 
         let event_id: DWORD = if !self.event_map.contains_key(&event_name) {
@@ -192,6 +228,32 @@ impl MSFS {
             SIMCONNECT_EVENT_FLAG_GROUPID_IS_PRIORITY,
         ) {
             panic!("Could not transmit event");
+        }
+    }
+
+    pub fn set_var(&mut self, var: String, value: DWORD) {
+        log::trace!("Setting variable \"{}\" with value \"{}\"", var, value);
+
+        let data_definition_id: DWORD = if !self.data_definition_map.contains_key(&var) {
+            self.register_data_definition(var)
+        } else {
+            *self
+                .data_definition_map
+                .get(&var)
+                .expect("data_definition_map changed after container_key check")
+        };
+
+        let mut data = vec![vec![value]];
+
+        if !self.connection.set_data_on_sim_object(
+            data_definition_id,
+            SIMCONNECT_OBJECT_ID_USER,
+            0,
+            1,
+            std::mem::size_of::<DWORD>().try_into().unwrap(),
+            data.as_mut_ptr() as *mut c_void,
+        ) {
+            panic!("Could not set variable");
         }
     }
 

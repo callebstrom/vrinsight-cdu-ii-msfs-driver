@@ -65,6 +65,217 @@ mappings:
     FUN26: H:A320_Neo_CDU_1_BTN_EXEC
     FUN41: H:A320_Neo_CDU_1_BTN_PREVPAGE
     FUN42: H:A320_Neo_CDU_1_BTN_NEXTPAGE
+  B736:
+    LSKL1:
+      event: ROTOR_BRAKE
+      value: 53401
+    LSKL2:
+      event: ROTOR_BRAKE
+      value: 53501
+    LSKL3:
+      event: ROTOR_BRAKE
+      value: 53601
+    LSKL4:
+      event: ROTOR_BRAKE
+      value: 53701
+    LSKL5:
+      event: ROTOR_BRAKE
+      value: 53801
+    LSKL6:
+      event: ROTOR_BRAKE
+      value: 53901
+    LSKR1:
+      event: ROTOR_BRAKE
+      value: 54001
+    LSKR2:
+      event: ROTOR_BRAKE
+      value: 54101
+    LSKR3:
+      event: ROTOR_BRAKE
+      value: 54201
+    LSKR4:
+      event: ROTOR_BRAKE
+      value: 54301
+    LSKR5:
+      event: ROTOR_BRAKE
+      value: 54401
+    LSKR6:
+      event: ROTOR_BRAKE
+      value: 54501
+    KEY0:
+      event: ROTOR_BRAKE
+      value: 57101
+    KEY1:
+      event: ROTOR_BRAKE
+      value: 56101
+    KEY2:
+      event: ROTOR_BRAKE
+      value: 56201
+    KEY3:
+      event: ROTOR_BRAKE
+      value: 56301
+    KEY4:
+      event: ROTOR_BRAKE
+      value: 56401
+    KEY5:
+      event: ROTOR_BRAKE
+      value: 56501
+    KEY6:
+      event: ROTOR_BRAKE
+      value: 56601
+    KEY7:
+      event: ROTOR_BRAKE
+      value: 56701
+    KEY8:
+      event: ROTOR_BRAKE
+      value: 56801
+    KEY9:
+      event: ROTOR_BRAKE
+      value: 56901
+    KEY+:
+      event: ROTOR_BRAKE
+      value: 57201
+    KEY.:
+      event: ROTOR_BRAKE
+      value: 57001
+    KEYA: 
+      event: ROTOR_BRAKE
+      value: 57301
+    KEYB:
+      event: ROTOR_BRAKE
+      value: 57401
+    KEYC:
+      event: ROTOR_BRAKE
+      value: 57501
+    KEYD:
+      event: ROTOR_BRAKE
+      value: 57601
+    KEYE:
+      event: ROTOR_BRAKE
+      value: 57701
+    KEYF:
+      event: ROTOR_BRAKE
+      value: 57801
+    KEYG:
+      event: ROTOR_BRAKE
+      value: 57901
+    KEYH:
+      event: ROTOR_BRAKE
+      value: 58001
+    KEYI:
+      event: ROTOR_BRAKE
+      value: 58101
+    KEYJ:
+      event: ROTOR_BRAKE
+      value: 58201
+    KEYK:
+      event: ROTOR_BRAKE
+      value: 58301
+    KEYL:
+      event: ROTOR_BRAKE
+      value: 58401
+    KEYM:
+      event: ROTOR_BRAKE
+      value: 58501
+    KEYN:
+      event: ROTOR_BRAKE
+      value: 58601
+    KEYO:
+      event: ROTOR_BRAKE
+      value: 58701
+    KEYP:
+      event: ROTOR_BRAKE
+      value: 58801
+    KEYQ:
+      event: ROTOR_BRAKE
+      value: 58901
+    KEYR:
+      event: ROTOR_BRAKE
+      value: 59001
+    KEYS:
+      event: ROTOR_BRAKE
+      value: 59101
+    KEYT:
+      event: ROTOR_BRAKE
+      value: 59201
+    KEYU:
+      event: ROTOR_BRAKE
+      value: 59301
+    KEYV:
+      event: ROTOR_BRAKE
+      value: 59401
+    KEYW:
+      event: ROTOR_BRAKE
+      value: 59501
+    KEYX:
+      event: ROTOR_BRAKE
+      value: 59601
+    KEYY:
+      event: ROTOR_BRAKE
+      value: 59701
+    KEYZ:
+      event: ROTOR_BRAKE
+      value: 59801
+    KEYSP:
+      event: ROTOR_BRAKE
+      value: 59901
+    KEYDEL:
+      event: ROTOR_BRAKE
+      value: 60001
+    KEY/:
+      event: ROTOR_BRAKE
+      value: 60101
+    KEYCLR:
+      - event: ROTOR_BRAKE
+        value: 60201
+      - delay: 250
+      - event: ROTOR_BRAKE
+        value: 60204
+    FUN11:
+      event: ROTOR_BRAKE
+      value: 54601
+    FUN12:
+      event: ROTOR_BRAKE
+      value: 54701
+    FUN13:
+      event: ROTOR_BRAKE
+      value: 54801
+    FUN14:
+      event: ROTOR_BRAKE
+      value: 54901
+    FUN15:
+      event: ROTOR_BRAKE
+      value: 55001
+    FUN21:
+      event: ROTOR_BRAKE
+      value: 55101
+    FUN22:
+      event: ROTOR_BRAKE
+      value: 55201
+    FUN23:
+      event: ROTOR_BRAKE
+      value: 55301
+    FUN24:
+      event: ROTOR_BRAKE
+      value: 55401
+    FUN25:
+      event: ROTOR_BRAKE
+      value: 55501
+    FUN26:
+      event: ROTOR_BRAKE
+      value: 55601
+    FUN31:
+      event: ROTOR_BRAKE
+      value: 55701
+    FUN32:
+      event: ROTOR_BRAKE
+      value: 55801
+    FUN41:
+      event: ROTOR_BRAKE
+      value: 55901
+    FUN42:
+      event: ROTOR_BRAKE
+      value: 56001
   B737:
     LSKL1:
       event: ROTOR_BRAKE
@@ -406,3 +617,68 @@ mappings:
     FUN26: CJ4_FMC_1_BTN_EXEC
     FUN41: CJ4_FMC_1_BTN_PREVPAGE
     FUN42: CJ4_FMC_1_BTN_NEXTPAGE
+  CRJ900:
+    LSKL1: H:ASCRJ_MCDU1_L1
+    LSKL2: ASCRJ_MCDU1_L2
+    LSKL3: ASCRJ_MCDU1_L3
+    LSKL4: ASCRJ_MCDU1_L4
+    LSKL5: ASCRJ_MCDU1_L5
+    LSKL6: H:ASCRJ_MCDU1_L6
+    LSKR1: H:ASCRJ_MCDU1_R1
+    LSKR2: H:ASCRJ_MCDU1_R2
+    LSKR3: H:ASCRJ_MCDU1_R3
+    LSKR4: H:ASCRJ_MCDU1_R4
+    LSKR5: H:ASCRJ_MCDU1_R5
+    LSKR6: H:ASCRJ_MCDU1_R6
+    KEY0: H:ASCRJ_MCDU1_0
+    KEY1: H:ASCRJ_MCDU1_1
+    KEY2: H:ASCRJ_MCDU1_2
+    KEY3: H:ASCRJ_MCDU1_3
+    KEY4: H:ASCRJ_MCDU1_4
+    KEY5: H:ASCRJ_MCDU1_5
+    KEY6: H:ASCRJ_MCDU1_6
+    KEY7: H:ASCRJ_MCDU1_7
+    KEY8: H:ASCRJ_MCDU1_8
+    KEY9: H:ASCRJ_MCDU1_9
+    KEY+: H:ASCRJ_MCDU1_PLUSMINUS
+    KEY.: H:ASCRJ_MCDU1_DOT
+    KEYA: H:ASCRJ_MCDU1_A
+    KEYB: H:ASCRJ_MCDU1_B
+    KEYC: H:ASCRJ_MCDU1_C
+    KEYD: H:ASCRJ_MCDU1_D
+    KEYE: H:ASCRJ_MCDU1_E
+    KEYF: H:ASCRJ_MCDU1_F
+    KEYG: H:ASCRJ_MCDU1_G
+    KEYH: H:ASCRJ_MCDU1_H
+    KEYI: H:ASCRJ_MCDU1_I
+    KEYJ: H:ASCRJ_MCDU1_J
+    KEYK: H:ASCRJ_MCDU1_K
+    KEYL: H:ASCRJ_MCDU1_L
+    KEYM: H:ASCRJ_MCDU1_M
+    KEYN: H:ASCRJ_MCDU1_N
+    KEYO: H:ASCRJ_MCDU1_O
+    KEYP: H:ASCRJ_MCDU1_P
+    KEYQ: H:ASCRJ_MCDU1_Q
+    KEYR: H:ASCRJ_MCDU1_R
+    KEYS: H:ASCRJ_MCDU1_S
+    KEYT: H:ASCRJ_MCDU1_T
+    KEYU: H:ASCRJ_MCDU1_U
+    KEYV: H:ASCRJ_MCDU1_V
+    KEYW: H:ASCRJ_MCDU1_W
+    KEYX: H:ASCRJ_MCDU1_X
+    KEYY: H:ASCRJ_MCDU1_Y
+    KEYZ: H:ASCRJ_MCDU1_Z
+    KEYSP: H:ASCRJ_MCDU1_SP
+    KEY/: H:ASCRJ_MCDU1_DIV
+    KEYCLR: H:ASCRJ_MCDU1_CLR
+    FUN11: H:ASCRJ_MCDU1_PERF
+    FUN12: H:ASCRJ_MCDU1_FPLN
+    FUN16: H:ASCRJ_MCDU1_TUN
+    FUN21: H:ASCRJ_MCDU1_IDX
+    FUN22: H:ASCRJ_MCDU1_LEGS
+    FUN23: H:ASCRJ_MCDU1_DEPARR
+    FUN24: H:ASCRJ_MCDU1_DIR
+    FUN25: H:ASCRJ_MCDU1_MFDADV
+    FUN26: H:ASCRJ_MCDU1_EXEC
+    FUN41: H:ASCRJ_MCDU1_PREVPAGE
+    FUN42: H:ASCRJ_MCDU1_NEXTPAGE

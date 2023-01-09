@@ -22,6 +22,9 @@ fn process_event(event: &keymap::Action, msfs: &mut msfs::MSFS) {
         keymap::Action::Delay(delay) => {
             thread::sleep(time::Duration::from_millis(delay.delay));
         }
+        keymap::Action::VarWithValue(var) => {
+            msfs.set_var(var.var.clone(), var.value);
+        }
     }
 }
 

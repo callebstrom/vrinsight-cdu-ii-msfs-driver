@@ -11,6 +11,12 @@ pub struct EventWithValue {
 }
 
 #[derive(Debug, Deserialize)]
+pub struct VarWithValue {
+    pub var: String,
+    pub value: u32
+}
+
+#[derive(Debug, Deserialize)]
 pub struct Delay {
     pub delay: u64
 }
@@ -20,6 +26,7 @@ pub struct Delay {
 pub enum Action {
     EventWithValue(EventWithValue),
     EventWithoutValue(String),
+    VarWithValue(VarWithValue),
     Delay(Delay)
 }
 
