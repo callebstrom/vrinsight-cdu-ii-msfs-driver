@@ -45,7 +45,7 @@ pub struct KeyMap {
 
 impl KeyMap {
     pub fn new() -> KeyMap {
-        let mut file = File::open("keymap_example.yaml").expect("Unable to open the file");
+        let mut file = File::open("keymap.yaml").expect("Unable to open the file");
         let mut contents = String::new();
         file.read_to_string(&mut contents)
             .expect("Unable to read the file");
