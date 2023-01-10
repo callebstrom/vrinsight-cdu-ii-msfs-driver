@@ -1,4 +1,5 @@
 # VRInsight CDU II MSFS Driver
+[![.github/workflows/release.yml](https://github.com/callebstrom/vrinsight-cdu-ii-msfs-driver/actions/workflows/release.yml/badge.svg)](https://github.com/callebstrom/vrinsight-cdu-ii-msfs-driver/actions/workflows/release.yml)
 
 ## How to run
 - Download the latest binary (`vrinsight-cdu-ii-msfs-driver.zip`) from [_Releases_](https://github.com/callebstrom/vrinsight-cdu-ii-msfs-driver/releases). You can place these three files contained within the ZIP anywhere after downloading but note that both `keymap.yaml` and `SimConnect.dll` needs to be co-located with the binary.
