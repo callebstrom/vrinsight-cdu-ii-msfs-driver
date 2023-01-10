@@ -1,5 +1,3 @@
-#![feature(strict_provenance, layout_for_ptr)]
-
 #[macro_use]
 extern crate serde;
 
