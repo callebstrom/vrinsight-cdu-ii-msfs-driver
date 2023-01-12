@@ -6,8 +6,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{D127781F-0661-414B-9745-4F61ECCC73B1}
 AppName=VRInsight CDU II MSFS Driver
-AppVersion=1.0.0
-;AppVerName=VRInsight CDU II MSFS Driver 1.0.0
+AppVersion=1.0.1
 AppPublisher=callebstrom
 AppPublisherURL=https://github.com/callebstrom/vrinsight-cdu-ii-msfs-driver
 AppSupportURL=https://github.com/callebstrom/vrinsight-cdu-ii-msfs-driver
@@ -15,7 +14,6 @@ AppUpdatesURL=https://github.com/callebstrom/vrinsight-cdu-ii-msfs-driver
 DefaultDirName={autopf}\VRInsight CDU II MSFS Driver
 DisableProgramGroupPage=yes
 LicenseFile=LICENSE
-; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputBaseFilename=setup
