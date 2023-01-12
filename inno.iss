@@ -18,7 +18,7 @@ LicenseFile=LICENSE
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputBaseFilename=mysetup
+OutputBaseFilename=setup
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -35,9 +35,12 @@ Source: "CHANGELOG.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 Source: "SimConnect.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "keymap.yaml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{autoprograms}\VRInsight CDU II MSFS Driver"; Filename: "{app}\vrinsight-cdu-ii-msfs-driver.exe"
-Name: "{autodesktop}\VRInsight CDU II MSFS Driver"; Filename: "{app}\vrinsight-cdu-ii-msfs-driver.exe"; Tasks: desktopicon
+Name: "{autoprograms}\VRInsight CDU II MSFS Driver"; Filename: "{app}\vrinsight-cdu-ii-msfs-driver.exe"; \
+  IconFilename:"{app}\icon.ico";
+Name: "{autodesktop}\VRInsight CDU II MSFS Driver"; Filename: "{app}\vrinsight-cdu-ii-msfs-driver.exe"; \
+  IconFilename:"{app}\icon.ico"; Tasks: desktopicon
 

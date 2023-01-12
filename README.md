@@ -2,10 +2,9 @@
 [![.github/workflows/release.yml](https://github.com/callebstrom/vrinsight-cdu-ii-msfs-driver/actions/workflows/release.yml/badge.svg)](https://github.com/callebstrom/vrinsight-cdu-ii-msfs-driver/actions/workflows/release.yml)
 
 ## How to run
-- Download the latest binary (`vrinsight-cdu-ii-msfs-driver.zip`) from [_Releases_](https://github.com/callebstrom/vrinsight-cdu-ii-msfs-driver/releases). You can place these three files contained within the ZIP anywhere after downloading but note that both `keymap.yaml` and `SimConnect.dll` needs to be co-located with the binary.
-- Modify `keymap.yaml` to contain the COM port used by your VRInsight CDU II device. This can be found in _Device Manager_ -> _Ports (COM & LPT)_
-- Run `vrinsight-cdu-ii-msfs-driver.exe`
-
+- Download the latest installer (`setup.exe`) from [_Releases_](https://github.com/callebstrom/vrinsight-cdu-ii-msfs-driver/releases). You can place these three files contained within the ZIP anywhere after downloading but note that both `keymap.yaml` and `SimConnect.dll` needs to be co-located with the binary.
+- Install _VRInsight CDU II MSFS Driver_ anywhere
+- Navigate to the installation directory and modify `keymap.yaml` to contain the COM port used by your VRInsight CDU II device. This can be found in _Device Manager_ -> _Ports (COM & LPT)_
 
 ## What
 

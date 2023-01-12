@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1 - 2023-01-13
+- Generate setup.exe installer for easier setup
+
 ## 1.0.0 - 2023-01-11
 - Initial release of VRInsight CDU II MSFS driver
 - `mobi-flight-event-module` with custom `events.txt` to support the Aerosoft CRJ
