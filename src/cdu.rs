@@ -19,9 +19,12 @@ impl CDU {
     }
 
     pub fn keep_alive(&mut self) {
-        self.port
-            .write(GET_VERSION_COMMAND)
-            .expect("Failed to send keep-alive");
+        let keep_alive_result = self.port.write(CONNECT_COMMAND);
+
+        if (keep_alive_result.is_err()) {
+            log::warn!("Lost connection to device");
+            return
+        }
 
         loop {
             if Self::get_command_response(self.port.as_mut()).is_ok() {

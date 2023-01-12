@@ -6,7 +6,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{D127781F-0661-414B-9745-4F61ECCC73B1}
 AppName=VRInsight CDU II MSFS Driver
-AppVersion=1.0.1
+AppVersion=1.0.2
 AppPublisher=callebstrom
 AppPublisherURL=https://github.com/callebstrom/vrinsight-cdu-ii-msfs-driver
 AppSupportURL=https://github.com/callebstrom/vrinsight-cdu-ii-msfs-driver

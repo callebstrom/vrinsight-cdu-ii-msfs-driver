@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.2 - 2023-01-13
+- Fix keep-alive logic
+
 ## 1.0.1 - 2023-01-13
 - Generate setup.exe installer for easier setup
 
