@@ -7,7 +7,7 @@ mod cdu;
 mod keymap;
 mod msfs;
 
-const KEEP_ALIVE_INTERVAL: u128 = 5000;
+const KEEP_ALIVE_INTERVAL: u128 = 60000;
                         
 fn process_event(event: &keymap::Action, msfs: &mut msfs::MSFS) {
     match event {
@@ -55,8 +55,7 @@ fn main() {
                     },
                     None => {}
                 }
-
-                cdu.keep_alive();
+                last_keep_alive = Instant::now();
             }
             Err(_) => {}
         }
