@@ -37,8 +37,6 @@ Source: "icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{autoprograms}\VRInsight CDU II MSFS Driver"; Filename: "{app}\vrinsight-cdu-ii-msfs-driver.exe"; \
-  IconFilename:"{app}\icon.ico";
-Name: "{autodesktop}\VRInsight CDU II MSFS Driver"; Filename: "{app}\vrinsight-cdu-ii-msfs-driver.exe"; \
-  IconFilename:"{app}\icon.ico"; Tasks: desktopicon
+Name: "{autoprograms}\VRInsight CDU II MSFS Driver"; Filename: "{app}\vrinsight-cdu-ii-msfs-driver.exe"; IconFilename:"{app}\icon.ico";
+Name: "{autodesktop}\VRInsight CDU II MSFS Driver"; Filename: "{app}\vrinsight-cdu-ii-msfs-driver.exe"; IconFilename:"{app}\icon.ico"; Tasks: desktopicon
 
