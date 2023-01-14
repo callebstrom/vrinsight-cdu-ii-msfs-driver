@@ -25,7 +25,7 @@ While the above solution works, I've found it to be working half of the time at 
 
 ## TODO
 - [ ] Installer
-  - Register as MSFS startup binary
-  - Install binary in appropriate dir
-  - Install `mobiflight-event-module` if not already installed
+  - [ ] Register as MSFS startup binary
+  - [X] Install binary in appropriate dir
+  - [ ] Install `mobiflight-event-module` if not already installed
 - [ ] Automated COM port scan
