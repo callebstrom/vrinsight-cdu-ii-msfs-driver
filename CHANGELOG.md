@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.3 - 2023-01-14
+- Use correct events for CRJ LSKs
+
 ## 1.0.2 - 2023-01-13
 - Fix keep-alive logic
 
