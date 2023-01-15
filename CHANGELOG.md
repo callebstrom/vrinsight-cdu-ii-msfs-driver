@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.4 - 2023-01-15
+- Use correct event for CRJ `PLUS` and `PERIOD`
+
 ## 1.0.3 - 2023-01-14
 - Use correct events for CRJ LSKs
 
